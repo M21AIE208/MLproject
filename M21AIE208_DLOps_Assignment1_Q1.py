@@ -67,14 +67,14 @@ criterion = nn.CrossEntropyLoss()
 # In[8]:
 
 
-model
+print(model)
 
 
 # In[4]:
 
 
 # KFold Cross Validation
-kf = KFold(n_splits=10, shuffle=True, random_state=42)
+kf = KFold(n_splits=20, shuffle=True, random_state=42)
 writer = SummaryWriter()  # Initialize Tensorboard writer
 for fold, (train_index, test_index) in enumerate(kf.split(X)):
     X_train, X_test = X[train_index], X[test_index]
