@@ -48,9 +48,9 @@ class IrisDataset(Dataset):
 class MLP(nn.Module):
     def __init__(self):
         super(MLP, self).__init__()
-        self.fc1 = nn.Linear(4, 5)
-        self.fc2 = nn.Linear(5, 7)
-        self.fc3 = nn.Linear(7, 3)
+        self.fc1 = nn.Linear(4, 10)
+        self.fc2 = nn.Linear(10, 5)
+        self.fc3 = nn.Linear(5, 3)
 
     def forward(self, x):
         x = torch.relu(self.fc1(x))
@@ -60,21 +60,21 @@ class MLP(nn.Module):
 
 # Initialize model, optimizer, and loss function
 model = MLP()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+optimizer = optim.Adam(model.parameters(), lr=0.005)
 criterion = nn.CrossEntropyLoss()
 
 
 # In[8]:
 
 
-model
+print(model)
 
 
 # In[4]:
 
 
 # KFold Cross Validation
-kf = KFold(n_splits=10, shuffle=True, random_state=42)
+kf = KFold(n_splits=20, shuffle=True, random_state=42)
 writer = SummaryWriter()  # Initialize Tensorboard writer
 for fold, (train_index, test_index) in enumerate(kf.split(X)):
     X_train, X_test = X[train_index], X[test_index]
@@ -133,21 +133,6 @@ tf_data = torch.Tensor(X_pca)
 writer.add_embedding(tf_data,metadata=y)
 
 writer.close()
-
-
-# In[6]:
-
-
-get_ipython().run_line_magic('load_ext', 'tensorboard')
-
-
-# In[9]:
-
-
-get_ipython().run_line_magic('tensorboard', '--logdir runs')
-
-
-# In[7]:
 
 
 
