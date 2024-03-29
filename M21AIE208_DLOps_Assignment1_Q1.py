@@ -60,7 +60,7 @@ class MLP(nn.Module):
 
 # Initialize model, optimizer, and loss function
 model = MLP()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+optimizer = optim.Adam(model.parameters(), lr=0.005)
 criterion = nn.CrossEntropyLoss()
 
 
